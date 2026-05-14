@@ -1,13 +1,11 @@
 #include "checkmanager.h"
-#include "utils.hpp"
 
 #include <unistd.h>
 #include <iostream>
 
 CheckManager::CheckManager(size_t repeatingTime, const fs::path &checkingDir,
-                 EReportType reportType) : _repeatingTime(repeatingTime)
+                 EReportType reportType) : _repeatingTime(repeatingTime), _checkingDir(checkingDir)
 {
-    _checkingDir = checkingDir.empty() ? Utils::getHomeDir() : checkingDir;
     visitor = std::make_unique<DirVisitor>();
     initWriter(reportType);
 }

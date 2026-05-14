@@ -18,18 +18,17 @@ enum class EReportType : uint8_t
 /// Класс-оркестратор для выполнения основных шагов при поиске
 class CheckManager
 {
-  public:
+public:
     /// Конструктор
     /// @param repeatingTime время между запусками в секундах
-    CheckManager(size_t repeatingTime = 30, const fs::path &checkingDir = "",
-                 EReportType reportType = EReportType::JSON);
+    CheckManager(size_t repeatingTime, const fs::path &checkingDir, EReportType reportType);
     /// Деструктор
     ~CheckManager() = default;
 
     /// Запустить поиск медиафайлов
     void run() const;
 
-  private:
+private:
     /// Инициализировать класс для записи отчета
     void initWriter(EReportType reportType);
 

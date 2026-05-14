@@ -8,7 +8,7 @@ using namespace nlohmann;
 
 void JSONWriter::writeReport(const std::unordered_multimap<EFileType, std::string> &rawInfo) const
 {
-    json result = json::object();
+    json result = {{"audio", json::array()}, {"video", json::array()}, {"images", json::array()}};
 
     for (const auto &[type, path] : rawInfo)
     {
