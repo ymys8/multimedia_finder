@@ -14,19 +14,16 @@ FetchContent_MakeAvailable(nlohmann_json)
 
 add_executable(multimedia_finder)
 
-target_sources(multimedia_finder PRIVATE 
-    checkmanager.h
-    checker.h
-    dirvisitor.h
-    reportwriter.h
+target_include_directories(multimedia_finder PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-    checkmanager.cpp
-    checker.cpp
-    dirvisitor.cpp
-    reportwriter.cpp
-    main.cpp
-
-    utils.hpp
+target_sources(multimedia_finder PRIVATE
+    src/checkmanager.cpp
+    src/checker.cpp
+    src/dirvisitor.cpp
+    src/reportwriter.cpp
+    src/main.cpp
 )
 
 target_link_libraries(multimedia_finder PRIVATE
