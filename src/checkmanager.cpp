@@ -5,7 +5,7 @@
 #include <iostream>
 
 CheckManager::CheckManager(size_t repeatingTime, const fs::path &checkingDir,
-                 EReportType reportType) : _repeatingTime(repeatingTime), _checkingDir(checkingDir)
+                 EReportType reportType) : _repeatingTime(repeatingTime)
 {
     _checkingDir = checkingDir.empty() ? Utils::getHomeDir() : checkingDir;
     visitor = std::make_unique<DirVisitor>();

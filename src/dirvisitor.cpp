@@ -8,7 +8,7 @@ DirVisitor::DirVisitor()
 std::unordered_multimap<EFileType, std::string> DirVisitor::visit(const fs::path &root) const
 {
     std::unordered_multimap<EFileType, std::string> result;
-    for (const auto& entry : fs::recursive_directory_iterator(root)) 
+    for (const auto& entry : fs::recursive_directory_iterator(root, fs::directory_options::skip_permission_denied)) 
     {
         if (entry.is_directory())
         {

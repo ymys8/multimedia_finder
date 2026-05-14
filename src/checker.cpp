@@ -1,6 +1,8 @@
 #include "checker.h"
 
 #include <unordered_map>
+#include <algorithm>
+#include <cctype>
 
 namespace
 {
@@ -25,7 +27,12 @@ namespace
 
 EFileType MultimediaChecker::check(const fs::path &file) const
 {
-    auto findIt = MEDIA_EXTENSIONS.find(file.extension());
+    auto extension = file.extension().string();
+    std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+    
+    auto findIt = MEDIA_EXTENSIONS.find(extension);
     if (findIt == MEDIA_EXTENSIONS.end())
     {
         return EFileType::None;
