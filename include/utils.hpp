@@ -6,6 +6,7 @@ namespace fs = std::filesystem;
 
 namespace Utils
 {
+/// Получить путь до домашней директории 
 inline fs::path getHomeDir()
 {
     const char *home = getenv("HOME");
@@ -14,6 +15,6 @@ inline fs::path getHomeDir()
         return home;
     }
 
-    return "";
+    throw std::runtime_error("Не удалось определить домашний каталог");
 }
 } // namespace Utils
