@@ -1,6 +1,6 @@
 #pragma once
 
-#include "checkmanager.h"
+#include "reportwriter.h"
 
 #include <algorithm>
 #include <cctype>
@@ -26,12 +26,12 @@ inline fs::path getHomeDir()
 /// Аргументы командной строки
 struct CmdArgs
 {
-    std::string directory;  ///< Директория для обхода
+    fs::path directory;     ///< Директория для обхода
     int interval;           ///< Временной интервал
     EReportType reportType; ///< Тип отчета
 };
 
-/// Привести строку к нижнему регистру 
+/// Привести строку к нижнему регистру
 inline void toLower(std::string &str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::tolower(c); });
@@ -40,7 +40,6 @@ inline void toLower(std::string &str)
 /// Парсинг аргументов командной строки
 inline CmdArgs parse(int argc, char *argv[])
 {
-    const std::string howUseUtil = "Как использовать: server -c <путь до конфига> -p <порт сервера>";
     CmdArgs result;
     result.directory = Utils::getHomeDir();
     result.interval = 30;
@@ -53,6 +52,10 @@ inline CmdArgs parse(int argc, char *argv[])
         if (arg == "--dir" && i + 1 < argc)
         {
             result.directory = argv[++i];
+            if (!fs::is_directory(result.directory))
+            {
+                throw std::invalid_argument("Каталог не существует или не является директорией");
+            }
         }
         else if (arg == "--interval" && i + 1 < argc)
         {

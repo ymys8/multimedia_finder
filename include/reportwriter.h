@@ -7,6 +7,13 @@
 
 namespace fs = std::filesystem;
 
+/// Перечисление для видов отчета поиска
+enum class EReportType : uint8_t
+{
+    JSON = 0, ///< В виде файла json
+    HTTP      ///< Через http по адресу http://localhost:1234/media_files
+};
+
 /// Интерфейс для записи отчета
 class IReportWriter
 {
