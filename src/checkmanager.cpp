@@ -23,5 +23,14 @@ void CheckManager::run() const
 
 void CheckManager::initWriter(EReportType reportType)
 {
-    writer = std::make_unique<JSONWriter>();
+    switch (reportType)
+    {
+    case EReportType::HTTP:
+        writer = std::make_unique<HTTPWriter>();
+        break;
+    case EReportType::JSON:
+    default:
+        writer = std::make_unique<JSONWriter>();
+        break;
+    }
 }

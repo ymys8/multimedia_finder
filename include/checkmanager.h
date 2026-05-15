@@ -14,7 +14,7 @@ class CheckManager
 public:
     /// Конструктор
     /// @param repeatingTime время между запусками в секундах
-    CheckManager(size_t repeatingTime, const fs::path &checkingDir, EReportType reportType);
+    explicit CheckManager(size_t repeatingTime, const fs::path &checkingDir, EReportType reportType);
     /// Деструктор
     ~CheckManager() = default;
 

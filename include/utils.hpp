@@ -91,4 +91,22 @@ inline CmdArgs parse(int argc, char *argv[])
 
     return result;
 }
+
+/// Перевести тип медиафайла в строку
+inline std::string fileType2Str(EFileType type)
+{
+    switch (type)
+    {
+    case EFileType::Audio:
+        return "audio";
+    case EFileType::Image:
+        return "images";
+    case EFileType::Video:
+        return "video";
+    default:
+        break;
+    }
+
+    return {};
+}
 } // namespace Utils
